@@ -25,6 +25,10 @@ Once the dependencies are installed, run
 After it is successfully compiled, copy it so user can access it from any location of the machine (MacOS).
     
     cp build/bin/iron /usr/local/bin
+    
+In case this doesn't work, just copy and paste the entire path to the iron instance and run this command:
+
+    cp <entire path to iron in your system> /usr/local/bin
 
 ## Running iron
 
