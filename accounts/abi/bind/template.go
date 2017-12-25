@@ -303,10 +303,10 @@ import org.iron.iron.internal.*;
 			}
 		{{end}}
 
-		// Musicoin address where this contract is located at.
+		// ironBank address where this contract is located at.
 		public final Address Address;
 
-		// Musicoin transaction in which this contract was deployed (if known!).
+		// ironBank transaction in which this contract was deployed (if known!).
 		public final Transaction Deployer;
 
 		// Contract instance bound to a blockchain address.

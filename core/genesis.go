@@ -159,7 +159,7 @@ func SetupGenesisBlock(db ethdb.Database, genesis *Genesis) (*params.ChainConfig
 	if (stored == common.Hash{}) {
 		if genesis == nil {
 			log.Info("Writing default main-net genesis block")
-			genesis = MusicoinGenesisBlock()
+			genesis = ironGenesisBlock()
 		} else {
 			log.Info("Writing custom genesis block")
 		}
@@ -318,15 +318,16 @@ func DefaultGenesisBlock() *Genesis {
 	}
 }
 
-// MusicoinGenesisBlock returns the Musicoin main net genesis block.
-func MusicoinGenesisBlock() *Genesis {
+// ironGenesisBlock returns the iron main net genesis block.
+func ironGenesisBlock() *Genesis {
 	return &Genesis{
 		Config:     params.MainnetChainConfig,
-		Timestamp:  0,
-		Nonce:      42,
-		ExtraData:  nil,
-		Mixhash:    common.HexToHash("0x00000000000000000000000000000000000000647572616c65787365646c6578"),
-		GasLimit:   8000000,
+		Timestamp:  0x00,
+		Nonce:      0x0000000000000042,
+		ExtraData:  0xaa4369df0fc72c337c315eb014b0fa1608109e07,
+		ParentHash: common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000"),
+		Mixhash:    common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000"),
+		GasLimit:   0x4c4b40,
 		Difficulty: big.NewInt(4000000),
 		Alloc:      decodePrealloc(mainnetAllocData),
 	}

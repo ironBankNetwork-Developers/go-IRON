@@ -1,8 +1,8 @@
 // Copyright 2017 The Go-Ethereum Authors
 // This file is part of the Go-Ethereum library.
 //
-// Copyright 2017 The Go-Musicoin Authors
-// This file is part of the Go-Musicoin library.
+// Copyright 2017 The Go-IRON Authors
+// This file is part of the Go-IRON library.
 //
 // The go-ethereum library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -39,7 +39,7 @@ import (
 
 // Ethash proof-of-work protocol constants.
 var (
-	musicBlockReward     *big.Int = new(big.Int).Mul(big.NewInt(314), big.NewInt(1e+18))
+	ironBlockReward     *big.Int = new(big.Int).Mul(big.NewInt(314), big.NewInt(1e+18))
 	mcip3BlockReward     *big.Int = new(big.Int).Mul(big.NewInt(250), big.NewInt(1e+18))
 	ubiBlockReward       *big.Int = new(big.Int).Mul(big.NewInt(50), big.NewInt(1e+18))
 	devBlockReward       *big.Int = new(big.Int).Mul(big.NewInt(14), big.NewInt(1e+18))
@@ -534,7 +534,7 @@ var (
 // TODO (karalabe): Move the chain maker into this package and make this private!
 func AccumulateRewards(config *params.ChainConfig, state *state.StateDB, header *types.Header, uncles []*types.Header) {
 	// Select the correct block reward based on chain progression
-	blockReward := musicBlockReward
+	blockReward := ironBlockReward
 	mcip3Reward := mcip3BlockReward
 	ubiReservoir := ubiBlockReward
 	devReservoir := devBlockReward

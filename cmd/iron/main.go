@@ -141,20 +141,20 @@ func init() {
 	app.Action = iron
 	app.HideVersion = true // we have a command to print the version
 	app.Copyright = `Copyright 2013-2017 The Go-Ethereum Authors
-   Copyright 2016-2017 The Go-Musicoin Authors
+   Copyright 2016-2017 The go-IRON Authors
 
-   Go-Musicoin is free software: you can redistribute it and/or modify
+   go-IRON is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
-   Go-Musicoin is distributed in the hope that it will be useful,
+   go-IRON is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with Go-Musicoin. If not, see <http://www.gnu.org/licenses/>.`
+   along with go-IRON. If not, see <http://www.gnu.org/licenses/>.`
 	app.Commands = []cli.Command{
 		// See chaincmd.go:
 		initCommand,

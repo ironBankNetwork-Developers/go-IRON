@@ -1,8 +1,8 @@
 // Copyright 2014 The Go-Ethereum Authors
 // This file is part of the Go-Ethereum library.
 //
-// Copyright 2017 The Go-Musicoin Authors
-// This file is part of the Go-Musicoin library.
+// Copyright 2017 The go-IRON Authors
+// This file is part of the go-IRON library.
 //
 // The go-ethereum library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by

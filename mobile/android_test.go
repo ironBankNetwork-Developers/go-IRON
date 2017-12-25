@@ -40,7 +40,7 @@ import android.test.MoreAsserts;
 import java.math.BigInteger;
 import java.util.Arrays;
 
-import org.musicoin.iron.*;
+import network.ironbank.iron.*;
 
 public class AndroidTest extends InstrumentationTestCase {
 	public AndroidTest() {}
@@ -96,7 +96,7 @@ public class AndroidTest extends InstrumentationTestCase {
 
 		try {
 			// Start up a new inprocess node
-			Node node = new Node(getInstrumentation().getContext().getFilesDir() + "/.musicoin", new NodeConfig());
+			Node node = new Node(getInstrumentation().getContext().getFilesDir() + "/.ironBank", new NodeConfig());
 			node.start();
 
 			// Retrieve some data via function calls (we don't really care about the results)
@@ -202,7 +202,7 @@ func TestAndroid(t *testing.T) {
 		}
 	}
 	// Generate the mobile bindings for iron and add the tester class
-	gobind := exec.Command("gomobile", "bind", "-javapkg", "org.musicoin", "github.com/ethereum/go-ethereum/mobile")
+	gobind := exec.Command("gomobile", "bind", "-javapkg", "network.ironbank", "github.com/ethereum/go-ethereum/mobile")
 	if output, err := gobind.CombinedOutput(); err != nil {
 		t.Logf("%s", output)
 		t.Fatalf("failed to run gomobile bind: %v", err)

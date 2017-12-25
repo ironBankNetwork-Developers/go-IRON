@@ -1,8 +1,8 @@
 // Copyright 2016 The Go-Ethereum Authors
 // This file is part of the Go-Ethereum library.
 //
-// Copyright 2017 The Go-Musicoin Authors
-// This file is part of the Go-Musicoin library.
+// Copyright 2017 The Go-IRON Authors
+// This file is part of the Go-IRON library.
 //
 // The go-ethereum library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -32,25 +32,26 @@ var (
 )
 
 var (
+	// ESTO ES PARA MODIFICAR GENESIS.JSON en IRON (iron Bank Network)
 	// MainnetChainConfig is the chain parameters to run a node on the main network.
 	MainnetChainConfig = &ChainConfig{
-		ChainId:        big.NewInt(7762959),
-		HomesteadBlock: big.NewInt(1150000),
-		UBIForkBlock:   big.NewInt(1200001),
-		DAOForkBlock:   big.NewInt(36028797018963967),
+		ChainId:        big.NewInt(16721020172212),
+		HomesteadBlock: big.NewInt(0),
+		///UBIForkBlock:   big.NewInt(1200001),
+		DAOForkBlock:   nil,
 		DAOForkSupport: false,
-		EIP150Block:    big.NewInt(36028797018963967),
+		EIP150Block:    big.NewInt(0),
 		EIP150Hash:     common.HexToHash("0x"),
-		EIP155Block:    big.NewInt(36028797018963967),
-		EIP158Block:    big.NewInt(36028797018963967),
-		ByzantiumBlock: big.NewInt(36028797018963967),
+		EIP155Block:    big.NewInt(0),
+		EIP158Block:    big.NewInt(0),
+		ByzantiumBlock: big.NewInt(1700000),
 
 		Ethash: new(EthashConfig),
 	}
 
 	// TestnetChainConfig contains the chain parameters to run a node on the Ropsten test network.
 	TestnetChainConfig = &ChainConfig{
-		ChainId:        big.NewInt(7762955),
+		ChainId:        big.NewInt(16721020172503),
 		HomesteadBlock: big.NewInt(0),
 		UBIForkBlock:   big.NewInt(0),
 		DAOForkBlock:   big.NewInt(36028797018963967),

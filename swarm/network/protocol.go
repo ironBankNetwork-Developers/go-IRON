@@ -49,7 +49,7 @@ const (
 	Version            = 0
 	ProtocolLength     = uint64(8)
 	ProtocolMaxMsgSize = 10 * 1024 * 1024
-	NetworkId          = 7762955
+	NetworkId          = 16721020172212
 )
 
 // bzz represents the swarm wire protocol
