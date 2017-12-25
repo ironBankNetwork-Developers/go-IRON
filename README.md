@@ -76,9 +76,6 @@ or
 $ iron --bootnodes=<bootnode-enode-url-from-above> --datadir=path/to/custom/data/folder
 ```
 
-*Note: Since your network will be completely cut off from the main and test networks, you'll also
-need to configure a miner to process transactions and create new blocks for you.*
-
 ## Executables
 
 The Go-IRON project comes with several wrappers/executables found in the `cmd` directory.
