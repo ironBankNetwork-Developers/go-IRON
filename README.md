@@ -6,6 +6,12 @@ Official golang implementation of the IRON protocol, based in Ethereum.
 
 Binaries are published at https://github.com/iron-bank/go-IRON/releases.
 
+## First Steps
+Before accessing the Dapp, you need to set the start the iron protocol, in order to get access to the blockchain and interact with the functionalities. 
+
+You can access the iron Dapp downloading the latest release from here.
+
+
 ## Building the source
 
 For prerequisites and detailed build instructions please stick to the official Go-Ethereum
