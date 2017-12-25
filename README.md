@@ -67,9 +67,9 @@ via the `--bootnodes` flag. This allows you to find an official iron node. Furth
 
 ```
 $ iron --bootnodes=<bootnode-enode-url-from-above>
-
+```
 or
-
+```
 $ iron --bootnodes=<bootnode-enode-url-from-above> --datadir=path/to/custom/data/folder
 ```
 
