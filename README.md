@@ -50,7 +50,8 @@ This command will:
  * Start iron in fast sync mode (`--fast`), causing it to download more data in exchange for avoiding
    processing the entire history of the Iron Bank Network, which is very CPU intensive.
  * Bump the memory allowance of the database to 1024MB (`--cache=1024`) or 512MB (`--cache=512`), which can help significantly in sync times especially for HDD users. This flag is optional and you can set it as high or as low as
-   you'd like. You also can use `$ iron --fast --cache=512 console`, if not enough memory)
+   you'd like. 
+   You also may use `$ iron --fast --cache=512 console` , in case you don't have enough memory.
    
  * Start up iron's built-in interactive [JavaScript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console),
    (via the trailing `console` subcommand) through which you can invoke all official [`web3` methods](https://github.com/ethereum/wiki/wiki/JavaScript-API)
