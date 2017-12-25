@@ -322,13 +322,12 @@ func DefaultGenesisBlock() *Genesis {
 func ironGenesisBlock() *Genesis {
 	return &Genesis{
 		Config:     params.MainnetChainConfig,
-		Timestamp:  0x00,
-		Nonce:      0x0000000000000042,
-		ExtraData:  hexutil.MustDecode("0xaa4369df0fc72c337c315eb014b0fa1608109e07"),
-		ParentHash: common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000"),
-		Mixhash:    common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000"),
-		GasLimit:   0x4c4b40,
-		Difficulty: big.NewInt(4000000),
+		Timestamp:  0,
+		Nonce:      42,
+		ExtraData:  nil,
+		Mixhash:    common.HexToHash("0x00000000000000000000000000000000000000647572616c65787365646c6578"),
+		GasLimit:   8000000,
+		Difficulty: big.NewInt(40000),
 		Alloc:      decodePrealloc(mainnetAllocData),
 	}
 }
