@@ -7,21 +7,7 @@ Official golang implementation of the IRON protocol, based in Ethereum.
 Binaries are published at https://github.com/iron-bank/go-IRON/releases.
 
 ## First Steps
-Before accessing the Dapp, you need to compile and start the iron protocol, in order to get access to the blockchain and interact with the functionalities. 
-
-You also can access the iron Dapp downloading the latest release from [here](https://github.com/iron-bank/go-IRON/releases).
-
-You may need to install Go if you don't have Golang in your system.
-
-git clone https://github.com/iron-bank/go-IRON.git
-cd go-IRON
-make iron
-After it is successfully compiled, copy it so user can access it from any location of the machine.
-
-cp build/bin/gmc /usr/bin
-
-You also can access the iron Dapp downloading the latest release from [here](https://github.com/iron-bank/go-IRON/releases).
-
+Before accessing the Dapp, you need to compile and start the iron protocol, in order to get access to the blockchain and interact with the functionalities.
 
 ## Building the source
 
