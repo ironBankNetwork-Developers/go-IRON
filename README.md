@@ -9,7 +9,7 @@ Binaries are published at https://github.com/iron-bank/go-IRON/releases.
 ## First Steps
 Before accessing the Dapp, you need to start the iron protocol, in order to get access to the blockchain and interact with the functionalities. 
 
-You can access the iron Dapp downloading the latest release from here.
+You can access the iron Dapp downloading the latest release from [here](https://github.com/iron-bank/go-IRON/releases).
 
 
 ## Building the source
