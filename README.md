@@ -1,6 +1,8 @@
+![alt text](https://github.com/AlberErre/go-IRON/logo/iron.png)
+
 ## Go - Iron Bank Network
 
-Official golang implementation of the Ethereum-based iron protocol.
+Official golang implementation of the IRON protocol, based in Ethereum.
 
 Binaries are published at https://github.com/iron-bank/go-IRON/releases.
 
