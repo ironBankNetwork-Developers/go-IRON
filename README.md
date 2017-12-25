@@ -1,4 +1,4 @@
-![iron logo](/logo/iron.png)
+<img src="/logo/iron.png" width="48">
 
 ## Go - Iron Bank Network
 
