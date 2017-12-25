@@ -1,4 +1,4 @@
-![alt text](https://github.com/AlberErre/go-IRON/logo/iron.png)
+![iron logo](https://github.com/AlberErre/go-IRON/logo/iron.png)
 
 ## Go - Iron Bank Network
 
