@@ -7,9 +7,20 @@ Official golang implementation of the IRON protocol, based in Ethereum.
 Binaries are published at https://github.com/iron-bank/go-IRON/releases.
 
 ## First Steps
-Before accessing the Dapp, you need to start the iron protocol, in order to get access to the blockchain and interact with the functionalities. 
+Before accessing the Dapp, you need to compile and start the iron protocol, in order to get access to the blockchain and interact with the functionalities. 
 
-You can access the iron Dapp downloading the latest release from [here](https://github.com/iron-bank/go-IRON/releases).
+You also can access the iron Dapp downloading the latest release from [here](https://github.com/iron-bank/go-IRON/releases).
+
+You may need to install Go if you don't have Golang in your system.
+
+git clone https://github.com/iron-bank/go-IRON.git
+cd go-IRON
+make iron
+After it is successfully compiled, copy it so user can access it from any location of the machine.
+
+cp build/bin/gmc /usr/bin
+
+You also can access the iron Dapp downloading the latest release from [here](https://github.com/iron-bank/go-IRON/releases).
 
 
 ## Building the source
@@ -17,15 +28,17 @@ You can access the iron Dapp downloading the latest release from [here](https://
 For prerequisites and detailed build instructions please stick to the official Go-Ethereum
 [Installation Instructions](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum).
 
-Building iron requires both a Go (version 1.7 or later) and a C compiler.
-You can install them using your favourite package manager.
+Building iron requires both a Go (version 1.7 or later) and a C compiler. So you may need to install Go if you don't have Golang in your system.
+You can install them using your favourite package manager (`brew` is a good option for MacOS).
 Once the dependencies are installed, run
 
+    git clone https://github.com/iron-bank/go-IRON.git
+    cd go-IRON
     make iron
-
-or, to build the full suite of utilities:
-
-    make all
+        
+After it is successfully compiled, copy it so user can access it from any location of the machine (MacOS).
+    
+    cp build/bin/iron /usr/local/bin
 
 ## Running iron
 
