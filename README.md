@@ -1,4 +1,4 @@
-<img src="/logo/iron.png" align="middle" width="450">
+<img src="/logo/iron.png" align="centre" width="450">
 
 ## Go - Iron Bank Network
 
