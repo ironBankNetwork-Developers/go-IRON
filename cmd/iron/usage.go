@@ -32,7 +32,7 @@ var AppHelpTemplate = `NAME:
    {{.App.Name}} - {{.App.Usage}}
 
    Copyright 2013-2017 The Go-Ethereum Authors
-   Copyright 2016-2017 The Go-Musicoin Authors
+   Copyright 2017-2018 The Go-IRON Authors
 
 USAGE:
    {{.App.HelpName}} [options]{{if .App.Commands}} command [command options]{{end}} {{if .App.ArgsUsage}}{{.App.ArgsUsage}}{{else}}[arguments...]{{end}}

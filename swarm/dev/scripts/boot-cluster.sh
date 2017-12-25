@@ -159,7 +159,7 @@ start_gmc_node() {
 
   local args=(
     --datadir   "${dir}"
-    --networkid "321"
+    --networkid "16721020172503"
     --bootnodes "${BOOTNODE_URL}"
     --unlock    "${address}"
     --password  "${dir}/password"

@@ -3,9 +3,9 @@ InstallDir "$InstDir"
 OutFile "${OUTPUTFILE}" # set through command line arguments
 
 # Links for "Add/Remove Programs"
-!define HELPURL "https://github.com/Musicoin/go-musicoin/issues"
-!define UPDATEURL "https://github.com/Musicoin/go-musicoin/releases"
-!define ABOUTURL "https://github.com/Musicoin/go-musicoin"
+!define HELPURL "https://github.com/iron-bank/go-IRON/issues"
+!define UPDATEURL "https://github.com/iron-bank/go-IRON/releases"
+!define ABOUTURL "https://github.com/iron-bank/go-IRON"
 !define /date NOW "%Y%m%d"
 
 PageEx license

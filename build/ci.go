@@ -88,7 +88,7 @@ var (
 		},
 		{
 			Name:        "bootnode",
-			Description: "Musicoin bootnode.",
+			Description: "ironBank bootnode.",
 		},
 		{
 			Name:        "evm",
@@ -96,7 +96,7 @@ var (
 		},
 		{
 			Name:        "iron",
-			Description: "Musicoin CLI client.",
+			Description: "ironBank CLI client.",
 		},
 		{
 			Name:        "puppeth",
@@ -178,7 +178,7 @@ func doInstall(cmdline []string) {
 	// failure with outdated Go. This should save them the trouble.
 	if runtime.Version() < "go1.7" && !strings.Contains(runtime.Version(), "devel") {
 		log.Println("You have Go version", runtime.Version())
-		log.Println("go-musicoin requires at least Go version 1.7 and cannot")
+		log.Println("go-IRON requires at least Go version 1.7 and cannot")
 		log.Println("be compiled with an earlier version. Please upgrade your Go installation.")
 		os.Exit(1)
 	}
@@ -516,7 +516,7 @@ func isUnstableBuild(env build.Environment) bool {
 type debMetadata struct {
 	Env build.Environment
 
-	// go-musicoin version being built. Note that this
+	// go-IRON version being built. Note that this
 	// is not the debian package version. The package version
 	// is constructed by VersionString.
 	Version string
@@ -841,7 +841,7 @@ func doXCodeFramework(cmdline []string) {
 	// Build the iOS XCode framework
 	build.MustRun(goTool("get", "golang.org/x/mobile/cmd/gomobile"))
 	build.MustRun(gomobileTool("init"))
-	bind := gomobileTool("bind", "--target", "ios", "--tags", "ios", "-v", "github.com/Musicoin/go-musicoin/mobile")
+	bind := gomobileTool("bind", "--target", "ios", "--tags", "ios", "-v", "github.com/iron-bank/go-IRON/mobile")
 
 	if *local {
 		// If we're building locally, use the build folder and stop afterwards

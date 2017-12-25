@@ -1,12 +1,11 @@
 Source: {{.Name}}
 Section: science
 Priority: extra
-Maintainer: {{.Author}}
+Maintainer: AlberErre
 Build-Depends: debhelper (>= 8.0.0), golang-1.9
 Standards-Version: 3.9.5
-Homepage: https://musicoin.org
-Vcs-Git: git://github.com/Musicoin/go-musicoin.git
-Vcs-Browser: https://github.com/Musicoin/go-musicoin
+Homepage: https://ironbank.network
+Vcs-Browser: https://github.com/iron-bank/go-IRON
 
 Package: {{.Name}}
 Architecture: any

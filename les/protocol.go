@@ -38,7 +38,7 @@ var ProtocolVersions = []uint{lpv1}
 var ProtocolLengths = []uint64{15}
 
 const (
-	NetworkId          = 7762959
+	NetworkId          = 16721020172212
 	ProtocolMaxMsgSize = 10 * 1024 * 1024 // Maximum cap on the size of a protocol message
 )
 
