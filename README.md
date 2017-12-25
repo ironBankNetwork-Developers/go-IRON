@@ -59,7 +59,7 @@ This command will:
    This too is optional and if you leave it out you can always attach to an already running iron instance
    with `iron attach`.
 
-#### Manual connection to the main network
+#### Manual connection to the main Iron Bank Network
 
 With the bootnode operational and externally reachable (you can try `telnet <ip> <port>` to ensure
 it's indeed reachable), start every subsequent iron node pointed to the bootnode for peer discovery
