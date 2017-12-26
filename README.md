@@ -30,7 +30,14 @@ In case this doesn't work, just copy and paste the entire path to the iron insta
 
     sudo cp <entire-path-to-iron-instance-in-your-system> /usr/local/bin
 
-## Connect to main Iron Bank Network
+## Running iron
+
+First, you need to sync and connect to the main blockchain via `--bootnodes` to interact with the Iron Bank Network. Regarding functionality, going through all the possible command line flags is out of scope here (please consult the compatible Go-Ethereum
+[CLI Wiki page](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)), but we've
+enumerated a few common parameter combos to get you up to speed quickly on how you can run your
+own iron instance.
+
+### Sync Iron Bank Network
 
 As a single node you are not yet part of the iron Bank Network. You need to sync with the rest of the blockchain to use its functionalities and interact with other peers while using the Dapp. In order to do that, just run the following command:
 
@@ -44,17 +51,10 @@ This is just one of the official iron nodes that the team provides. You may just
 $ iron --bootnodes <bootnode-enode-parameters>
 ```
 
-#### Official iron enode list:
+##### Official iron enode list:
 ```
 enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303
 ```
-
-## Running iron
-
-Once you are fully connected to the main blockchain via `--bootnodes`, you can interact with it. However, going through all the possible command line flags is out of scope here (please consult the compatible Go-Ethereum
-[CLI Wiki page](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)), but we've
-enumerated a few common parameter combos to get you up to speed quickly on how you can run your
-own iron instance.
 
 ### Full node on the main Iron Bank Network
 
@@ -80,6 +80,22 @@ This command will:
    as well as iron's own [management APIs](https://github.com/ethereum/go-ethereum/wiki/Management-APIs).
    This too is optional and if you leave it out you can always attach to an already running iron instance
    with `iron attach`.
+
+#### Creating your first address
+
+Once you are in the javaScript console, you may interact with the blockchain and create a new address (remember you need to sync with the network first). Just type the following command:
+
+```
+> personal.newAccount()
+```
+
+The console will ask you for a password for this account twice (keep it safe!). Then, your address will show up, congratualtions!!!
+
+In order to see all your accounts just type the following command inside the javaScript console:
+
+```
+> personal.listAccounts
+```
 
 ## Executables
 
