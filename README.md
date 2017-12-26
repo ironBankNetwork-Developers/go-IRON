@@ -51,7 +51,7 @@ This is just one of the official iron nodes that the team provides. You may just
 $ iron --bootnodes <bootnode-enode-parameters>
 ```
 
-##### Official iron enode list:
+#### Official iron enode list:
 ```
 enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303
 ```
@@ -81,7 +81,7 @@ This command will:
    This too is optional and if you leave it out you can always attach to an already running iron instance
    with `iron attach`.
 
-#### Creating your first address
+#### Creating your first account (iron Address)
 
 Once you are in the javaScript console, you may interact with the blockchain and create a new address (remember you need to sync with the network first). Just type the following command:
 
