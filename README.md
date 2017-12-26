@@ -28,7 +28,7 @@ After it is successfully compiled, copy it so user can access it from any locati
     
 In case this doesn't work, just copy and paste the entire path to the iron instance and run this command:
 
-    sudo cp <entire path to iron in your system> /usr/local/bin
+    sudo cp <entire-path-to-iron-instance-in-your-system> /usr/local/bin
 
 ## Running iron
 
@@ -45,7 +45,7 @@ the user doesn't care about years-old historical data, so we can fast-sync quick
 state of the network. To do so:
 
 ```
-$ iron --fast --cache=1024 console
+$ iron --fast --cache=1024
 ```
 
 This command will:
@@ -62,20 +62,23 @@ This command will:
    This too is optional and if you leave it out you can always attach to an already running iron instance
    with `iron attach`.
 
-#### Manual connection to the main Iron Bank Network
+### Connect to main Iron Bank Network
 
-With the bootnode operational and externally reachable (you can try `telnet <ip> <port>` to ensure
-it's indeed reachable), start every subsequent iron node pointed to the bootnode for peer discovery
-via the `--bootnodes` flag. This allows you to find an official iron node.
+As a single node you are not yet part of the iron Bank Network. You need to sync with the rest of the blockchain to use its functionalities and interact with other peers while using the Dapp. In order to do that, just run the following command:
 
-```
-$ iron --bootnodes=<bootnode-enode-url-from-above>
-```
-You may just use one of the official nodes available to sync and connect to the blockchain. Just run one of the following commands (Official node list)
-
-#### Official node list:
 ```
 $ iron --bootnodes enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303
+```
+
+This is just one of the official iron nodes that the team provides. You may just use one of the official nodes available to sync and connect to the blockchain via the `--bootnodes` flag and the enode parameters, following this structure:
+
+```
+$ iron --bootnodes=<bootnode-enode-parameters>
+```
+
+#### Official iron node list:
+```
+enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303
 ```
 
 ## Executables
