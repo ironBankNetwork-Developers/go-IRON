@@ -20,7 +20,7 @@ Once the dependencies are installed, run
 
     git clone https://github.com/iron-bank/go-IRON.git
     cd go-IRON
-    make iron
+    make geth
         
 After it is successfully compiled, copy it so user can access it from any location of the machine (MacOS).
     
