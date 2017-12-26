@@ -81,7 +81,7 @@ This command will:
    This too is optional and if you leave it out you can always attach to an already running iron instance
    with `iron attach`.
 
-#### Creating your first account (iron Address)
+#### Creating your first Address
 
 Once you are in the javaScript console, you may interact with the blockchain and create a new address (remember you need to sync with the network first). Just type the following command:
 
