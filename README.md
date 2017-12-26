@@ -45,7 +45,7 @@ the user doesn't care about years-old historical data, so we can fast-sync quick
 state of the network. To do so:
 
 ```
-$ iron --fast --cache=1024
+$ iron --fast --cache=1024 console
 ```
 
 This command will:
@@ -67,16 +67,16 @@ This command will:
 As a single node you are not yet part of the iron Bank Network. You need to sync with the rest of the blockchain to use its functionalities and interact with other peers while using the Dapp. In order to do that, just run the following command:
 
 ```
-$ iron --bootnodes enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303
+$ iron --bootnodes enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303 console
 ```
 
 This is just one of the official iron nodes that the team provides. You may just use one of the official nodes available to sync and connect to the blockchain via the `--bootnodes` flag and the enode parameters, following this structure:
 
 ```
-$ iron --bootnodes=<bootnode-enode-parameters>
+$ iron --bootnodes <bootnode-enode-parameters> console
 ```
 
-#### Official iron node list:
+#### Official iron enode list:
 ```
 enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303
 ```
