@@ -30,9 +30,28 @@ In case this doesn't work, just copy and paste the entire path to the iron insta
 
     sudo cp <entire-path-to-iron-instance-in-your-system> /usr/local/bin
 
+## Connect to main Iron Bank Network
+
+As a single node you are not yet part of the iron Bank Network. You need to sync with the rest of the blockchain to use its functionalities and interact with other peers while using the Dapp. In order to do that, just run the following command:
+
+```
+$ iron --bootnodes enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303
+```
+
+This is just one of the official iron nodes that the team provides. You may just use one of these or connect to a peer you know beforehand. Just need an `enode` to sync and connect to the blockchain via the `--bootnodes` flag, following this structure:
+
+```
+$ iron --bootnodes <bootnode-enode-parameters>
+```
+
+### Official iron enode list:
+```
+enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303
+```
+
 ## Running iron
 
-Going through all the possible command line flags is out of scope here (please consult the compatible Go-Ethereum
+Once you are fully connected to the main blockchain via `--bootnodes`, you can interact with it. However, going through all the possible command line flags is out of scope here (please consult the compatible Go-Ethereum
 [CLI Wiki page](https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options)), but we've
 enumerated a few common parameter combos to get you up to speed quickly on how you can run your
 own iron instance.
@@ -61,25 +80,6 @@ This command will:
    as well as iron's own [management APIs](https://github.com/ethereum/go-ethereum/wiki/Management-APIs).
    This too is optional and if you leave it out you can always attach to an already running iron instance
    with `iron attach`.
-
-### Connect to main Iron Bank Network
-
-As a single node you are not yet part of the iron Bank Network. You need to sync with the rest of the blockchain to use its functionalities and interact with other peers while using the Dapp. In order to do that, just run the following command:
-
-```
-$ iron --bootnodes enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303 console
-```
-
-This is just one of the official iron nodes that the team provides. You may just use one of the official nodes available to sync and connect to the blockchain via the `--bootnodes` flag and the enode parameters, following this structure:
-
-```
-$ iron --bootnodes <bootnode-enode-parameters> console
-```
-
-#### Official iron enode list:
-```
-enode://3fe6b310f828d4b0273f62588dd77ddb0e9022a0381fcb651bf3a5ec0bb9e3ae2faeec1cd2c0971b873d47ed4f50fa4cb97f962d4054a324edd57f7cc6c856ce@[192.168.1.33]:30303
-```
 
 ## Executables
 
