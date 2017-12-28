@@ -87,7 +87,7 @@ var (
 )
 
 var (
-	ether = new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil)
+	iron = new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil)
 )
 
 func main() {
