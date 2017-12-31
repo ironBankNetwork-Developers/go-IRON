@@ -97,6 +97,19 @@ In order to see all your accounts just type the following command inside the jav
 > personal.listAccounts
 ```
 
+#### Unlock your Account to interact
+
+If a red error box appears while you try to interact with the blockchain saying you need to unlock your account. You need to do so by typing the following command in the javaScript console of your running iron node.
+
+```
+> personal.unlockAccount("<your-account-address>")
+```
+
+This will allow you to interact with the blockchain for a few minutes. This is a safety measure to avoid others stealing your funds. Alternatively, you can run the command `--unlock <your-account-address>` while starting your node to unlock your accounts instantly. e.g:
+```
+$ iron --fast --cache=1024 --unlock <your-account-address> console
+```
+
 ## Executables
 
 The Go-IRON project comes with several wrappers/executables found in the `cmd` directory.
