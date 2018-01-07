@@ -80,7 +80,7 @@ var defaultNodeConfig = &NodeConfig{
 	BootstrapNodes:        FoundationBootnodes(),
 	MaxPeers:              25,
 	EthereumEnabled:       true,
-	EthereumNetworkID:     16721020172612,
+	EthereumNetworkID:     1,
 	EthereumDatabaseCache: 16,
 }
 
@@ -138,7 +138,7 @@ func NewNode(datadir string, config *NodeConfig) (stack *Node, _ error) {
 		// If we have the testnet, hard code the chain configs too
 		if config.EthereumGenesis == TestnetGenesis() {
 			genesis.Config = params.TestnetChainConfig
-			if config.EthereumNetworkID == 16721020172612 {
+			if config.EthereumNetworkID == 1 {
 				config.EthereumNetworkID = 3
 			}
 		}

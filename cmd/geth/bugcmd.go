@@ -25,6 +25,7 @@ import (
 	"os/exec"
 	"runtime"
 	"strings"
+
 	"github.com/ethereum/go-ethereum/cmd/internal/browser"
 	"github.com/ethereum/go-ethereum/params"
 
