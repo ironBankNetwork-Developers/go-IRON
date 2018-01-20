@@ -1,6 +1,6 @@
 <img src="/logo/iron.png" width="300" alt="iron logo">
 
-## Go - Iron Bank Network
+## Go - Iron Bank Network 
 
 Official golang implementation of the IRON protocol, based in Ethereum.
 
