@@ -129,7 +129,7 @@ func Bind(types []string, abis []string, bytecodes []string, pkg string, lang La
 		return string(code), nil
 	}
 	// For all others just return as is for now
-	return buffer.String(), nil
+	return string(buffer.Bytes()), nil
 }
 
 // bindType is a set of type binders that convert Solidity types to some supported
@@ -304,15 +304,8 @@ var methodNormalizer = map[Lang]func(string) string{
 	LangJava: decapitalise,
 }
 
-// capitalise makes the first character of a string upper case, also removing any
-// prefixing underscores from the variable names.
+// capitalise makes the first character of a string upper case.
 func capitalise(input string) string {
-	for len(input) > 0 && input[0] == '_' {
-		input = input[1:]
-	}
-	if len(input) == 0 {
-		return ""
-	}
 	return strings.ToUpper(input[:1]) + input[1:]
 }
 
@@ -322,24 +315,15 @@ func decapitalise(input string) string {
 }
 
 // structured checks whether a method has enough information to return a proper
-// Go struct or if flat returns are needed.
+// Go struct ot if flat returns are needed.
 func structured(method abi.Method) bool {
 	if len(method.Outputs) < 2 {
 		return false
 	}
-	exists := make(map[string]bool)
 	for _, out := range method.Outputs {
-		// If the name is anonymous, we can't organize into a struct
 		if out.Name == "" {
 			return false
 		}
-		// If the field name is empty when normalized or collides (var, Var, _var, _Var),
-		// we can't organize into a struct
-		field := capitalise(out.Name)
-		if field == "" || exists[field] {
-			return false
-		}
-		exists[field] = true
 	}
 	return true
 }

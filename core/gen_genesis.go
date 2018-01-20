@@ -13,8 +13,6 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 )
 
-var _ = (*genesisSpecMarshaling)(nil)
-
 func (g Genesis) MarshalJSON() ([]byte, error) {
 	type Genesis struct {
 		Config     *params.ChainConfig                         `json:"config"`

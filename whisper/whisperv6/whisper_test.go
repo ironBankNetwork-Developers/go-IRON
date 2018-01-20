@@ -19,13 +19,11 @@ package whisperv6
 import (
 	"bytes"
 	"crypto/ecdsa"
-	"crypto/sha256"
 	mrand "math/rand"
 	"testing"
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
-	"golang.org/x/crypto/pbkdf2"
 )
 
 func TestWhisperBasic(t *testing.T) {
@@ -80,7 +78,15 @@ func TestWhisperBasic(t *testing.T) {
 		t.Fatalf("failed w.Messages.")
 	}
 
-	derived := pbkdf2.Key([]byte(peerID), nil, 65356, aesKeyLength, sha256.New)
+	var derived []byte
+	ver := uint64(0xDEADBEEF)
+	if _, err := deriveKeyMaterial(peerID, ver); err != unknownVersionError(ver) {
+		t.Fatalf("failed deriveKeyMaterial with param = %v: %s.", peerID, err)
+	}
+	derived, err = deriveKeyMaterial(peerID, 0)
+	if err != nil {
+		t.Fatalf("failed second deriveKeyMaterial with param = %v: %s.", peerID, err)
+	}
 	if !validateSymmetricKey(derived) {
 		t.Fatalf("failed validateSymmetricKey with param = %v.", derived)
 	}
@@ -472,8 +478,8 @@ func TestExpiry(t *testing.T) {
 	InitSingleTest()
 
 	w := New(&DefaultConfig)
-	w.SetMinimumPowTest(0.0000001)
-	defer w.SetMinimumPowTest(DefaultMinimumPoW)
+	w.SetMinimumPoW(0.0000001)
+	defer w.SetMinimumPoW(DefaultMinimumPoW)
 	w.Start(nil)
 	defer w.Stop()
 
@@ -529,7 +535,7 @@ func TestCustomization(t *testing.T) {
 	InitSingleTest()
 
 	w := New(&DefaultConfig)
-	defer w.SetMinimumPowTest(DefaultMinimumPoW)
+	defer w.SetMinimumPoW(DefaultMinimumPoW)
 	defer w.SetMaxMessageSize(DefaultMaxMessageSize)
 	w.Start(nil)
 	defer w.Stop()
@@ -563,7 +569,7 @@ func TestCustomization(t *testing.T) {
 		t.Fatalf("successfully sent envelope with PoW %.06f, false positive (seed %d).", env.PoW(), seed)
 	}
 
-	w.SetMinimumPowTest(smallPoW / 2)
+	w.SetMinimumPoW(smallPoW / 2)
 	err = w.Send(env)
 	if err != nil {
 		t.Fatalf("failed to send envelope with seed %d: %s.", seed, err)
@@ -625,7 +631,7 @@ func TestSymmetricSendCycle(t *testing.T) {
 	InitSingleTest()
 
 	w := New(&DefaultConfig)
-	defer w.SetMinimumPowTest(DefaultMinimumPoW)
+	defer w.SetMinimumPoW(DefaultMinimumPoW)
 	defer w.SetMaxMessageSize(DefaultMaxMessageSize)
 	w.Start(nil)
 	defer w.Stop()
@@ -714,7 +720,7 @@ func TestSymmetricSendWithoutAKey(t *testing.T) {
 	InitSingleTest()
 
 	w := New(&DefaultConfig)
-	defer w.SetMinimumPowTest(DefaultMinimumPoW)
+	defer w.SetMinimumPoW(DefaultMinimumPoW)
 	defer w.SetMaxMessageSize(DefaultMaxMessageSize)
 	w.Start(nil)
 	defer w.Stop()
@@ -782,7 +788,7 @@ func TestSymmetricSendKeyMismatch(t *testing.T) {
 	InitSingleTest()
 
 	w := New(&DefaultConfig)
-	defer w.SetMinimumPowTest(DefaultMinimumPoW)
+	defer w.SetMinimumPoW(DefaultMinimumPoW)
 	defer w.SetMaxMessageSize(DefaultMaxMessageSize)
 	w.Start(nil)
 	defer w.Stop()

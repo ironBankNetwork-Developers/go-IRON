@@ -216,7 +216,7 @@ func TestAPIResolve(t *testing.T) {
 			api := &Api{dns: x.dns}
 			uri := &URI{Addr: x.addr, Scheme: "bzz"}
 			if x.immutable {
-				uri.Scheme = "bzz-immutable"
+				uri.Scheme = "bzzi"
 			}
 			res, err := api.Resolve(uri)
 			if err == nil {

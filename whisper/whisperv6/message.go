@@ -61,7 +61,6 @@ type ReceivedMessage struct {
 	Payload   []byte
 	Padding   []byte
 	Signature []byte
-	Salt      []byte
 
 	PoW   float64          // Proof of work as described in the Whisper spec
 	Sent  uint32           // Time when the message was posted into the network
@@ -70,8 +69,9 @@ type ReceivedMessage struct {
 	Dst   *ecdsa.PublicKey // Message recipient (identity used to decode the message)
 	Topic TopicType
 
-	SymKeyHash   common.Hash // The Keccak256Hash of the key, associated with the Topic
-	EnvelopeHash common.Hash // Message envelope hash to act as a unique id
+	SymKeyHash      common.Hash // The Keccak256Hash of the key, associated with the Topic
+	EnvelopeHash    common.Hash // Message envelope hash to act as a unique id
+	EnvelopeVersion uint64
 }
 
 func isMessageSigned(flags byte) bool {
@@ -123,10 +123,6 @@ func (msg *sentMessage) appendPadding(params *MessageParams) error {
 	rawSize := len(params.Payload) + 1
 	if params.Src != nil {
 		rawSize += signatureLength
-	}
-
-	if params.KeySym != nil {
-		rawSize += AESNonceLength
 	}
 	odd := rawSize % padSizeLimit
 
@@ -200,31 +196,31 @@ func (msg *sentMessage) encryptAsymmetric(key *ecdsa.PublicKey) error {
 
 // encryptSymmetric encrypts a message with a topic key, using AES-GCM-256.
 // nonce size should be 12 bytes (see cipher.gcmStandardNonceSize).
-func (msg *sentMessage) encryptSymmetric(key []byte) (err error) {
+func (msg *sentMessage) encryptSymmetric(key []byte) (nonce []byte, err error) {
 	if !validateSymmetricKey(key) {
-		return errors.New("invalid key provided for symmetric encryption")
+		return nil, errors.New("invalid key provided for symmetric encryption")
 	}
 
 	block, err := aes.NewCipher(key)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	aesgcm, err := cipher.NewGCM(block)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// never use more than 2^32 random nonces with a given key
-	salt := make([]byte, aesgcm.NonceSize())
-	_, err = crand.Read(salt)
+	nonce = make([]byte, aesgcm.NonceSize())
+	_, err = crand.Read(nonce)
 	if err != nil {
-		return err
-	} else if !validateSymmetricKey(salt) {
-		return errors.New("crypto/rand failed to generate salt")
+		return nil, err
+	} else if !validateSymmetricKey(nonce) {
+		return nil, errors.New("crypto/rand failed to generate nonce")
 	}
 
-	msg.Raw = append(aesgcm.Seal(nil, salt, msg.Raw, nil), salt...)
-	return nil
+	msg.Raw = aesgcm.Seal(nil, nonce, msg.Raw, nil)
+	return nonce, nil
 }
 
 // Wrap bundles the message into an Envelope to transmit over the network.
@@ -237,10 +233,11 @@ func (msg *sentMessage) Wrap(options *MessageParams) (envelope *Envelope, err er
 			return nil, err
 		}
 	}
+	var nonce []byte
 	if options.Dst != nil {
 		err = msg.encryptAsymmetric(options.Dst)
 	} else if options.KeySym != nil {
-		err = msg.encryptSymmetric(options.KeySym)
+		nonce, err = msg.encryptSymmetric(options.KeySym)
 	} else {
 		err = errors.New("unable to encrypt the message: neither symmetric nor assymmetric key provided")
 	}
@@ -248,7 +245,7 @@ func (msg *sentMessage) Wrap(options *MessageParams) (envelope *Envelope, err er
 		return nil, err
 	}
 
-	envelope = NewEnvelope(options.TTL, options.Topic, msg)
+	envelope = NewEnvelope(options.TTL, options.Topic, nonce, msg)
 	if err = envelope.Seal(options); err != nil {
 		return nil, err
 	}
@@ -257,14 +254,7 @@ func (msg *sentMessage) Wrap(options *MessageParams) (envelope *Envelope, err er
 
 // decryptSymmetric decrypts a message with a topic key, using AES-GCM-256.
 // nonce size should be 12 bytes (see cipher.gcmStandardNonceSize).
-func (msg *ReceivedMessage) decryptSymmetric(key []byte) error {
-	// In v6, symmetric messages are expected to contain the 12-byte
-	// "salt" at the end of the payload.
-	if len(msg.Raw) < AESNonceLength {
-		return errors.New("missing salt or invalid payload in symmetric message")
-	}
-	salt := msg.Raw[len(msg.Raw)-AESNonceLength:]
-
+func (msg *ReceivedMessage) decryptSymmetric(key []byte, nonce []byte) error {
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return err
@@ -273,16 +263,15 @@ func (msg *ReceivedMessage) decryptSymmetric(key []byte) error {
 	if err != nil {
 		return err
 	}
-	if len(salt) != aesgcm.NonceSize() {
-		log.Error("decrypting the message", "AES salt size", len(salt))
-		return errors.New("wrong AES salt size")
+	if len(nonce) != aesgcm.NonceSize() {
+		log.Error("decrypting the message", "AES nonce size", len(nonce))
+		return errors.New("wrong AES nonce size")
 	}
-	decrypted, err := aesgcm.Open(nil, salt, msg.Raw[:len(msg.Raw)-AESNonceLength], nil)
+	decrypted, err := aesgcm.Open(nil, nonce, msg.Raw, nil)
 	if err != nil {
 		return err
 	}
 	msg.Raw = decrypted
-	msg.Salt = salt
 	return nil
 }
 

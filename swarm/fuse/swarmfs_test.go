@@ -95,7 +95,7 @@ func mountDir(t *testing.T, api *api.Api, files map[string]fileInfo, bzzHash str
 	}
 
 	// Test listMounts
-	if !found {
+	if found == false {
 		t.Fatalf("Error getting mounts information for %v: %v", mountDir, err)
 	}
 
@@ -185,8 +185,10 @@ func isDirEmpty(name string) bool {
 	defer f.Close()
 
 	_, err = f.Readdirnames(1)
-
-	return err == io.EOF
+	if err == io.EOF {
+		return true
+	}
+	return false
 }
 
 type testAPI struct {
@@ -386,7 +388,7 @@ func (ta *testAPI) seekInMultiChunkFile(t *testing.T) {
 	d.Read(contents)
 	finfo := files["1.txt"]
 
-	if !bytes.Equal(finfo.contents[:6024][5000:], contents) {
+	if bytes.Compare(finfo.contents[:6024][5000:], contents) != 0 {
 		t.Fatalf("File seek contents mismatch")
 	}
 	d.Close()

@@ -84,7 +84,7 @@ func genValueTx(nbytes int) func(int, *BlockGen) {
 	return func(i int, gen *BlockGen) {
 		toaddr := common.Address{}
 		data := make([]byte, nbytes)
-		gas, _ := IntrinsicGas(data, false, false)
+		gas := IntrinsicGas(data, false, false)
 		tx, _ := types.SignTx(types.NewTransaction(gen.TxNonce(benchRootAddr), toaddr, big.NewInt(1), gas, nil, data), types.HomesteadSigner{}, benchRootKey)
 		gen.AddTx(tx)
 	}
@@ -93,6 +93,7 @@ func genValueTx(nbytes int) func(int, *BlockGen) {
 var (
 	ringKeys  = make([]*ecdsa.PrivateKey, 1000)
 	ringAddrs = make([]common.Address, len(ringKeys))
+	bigTxGas  = new(big.Int).SetUint64(params.TxGas)
 )
 
 func init() {
@@ -112,8 +113,8 @@ func genTxRing(naccounts int) func(int, *BlockGen) {
 	return func(i int, gen *BlockGen) {
 		gas := CalcGasLimit(gen.PrevBlock(i - 1))
 		for {
-			gas -= params.TxGas
-			if gas < params.TxGas {
+			gas.Sub(gas, bigTxGas)
+			if gas.Cmp(bigTxGas) < 0 {
 				break
 			}
 			to := (from + 1) % naccounts
@@ -121,7 +122,7 @@ func genTxRing(naccounts int) func(int, *BlockGen) {
 				gen.TxNonce(ringAddrs[from]),
 				ringAddrs[to],
 				benchRootFunds,
-				params.TxGas,
+				bigTxGas,
 				nil,
 				nil,
 			)
@@ -169,7 +170,7 @@ func benchInsertChain(b *testing.B, disk bool, gen func(int, *BlockGen)) {
 		Alloc:  GenesisAlloc{benchRootAddr: {Balance: benchRootFunds}},
 	}
 	genesis := gspec.MustCommit(db)
-	chain, _ := GenerateChain(gspec.Config, genesis, ethash.NewFaker(), db, b.N, gen)
+	chain, _ := GenerateChain(gspec.Config, genesis, db, b.N, gen)
 
 	// Time the insertion of the new chain.
 	// State and blocks are stored in the same DB.

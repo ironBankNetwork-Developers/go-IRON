@@ -20,6 +20,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -44,46 +45,46 @@ const (
 // Receipt represents the results of a transaction.
 type Receipt struct {
 	// Consensus fields
-	PostState         []byte `json:"root"`
-	Status            uint   `json:"status"`
-	CumulativeGasUsed uint64 `json:"cumulativeGasUsed" gencodec:"required"`
-	Bloom             Bloom  `json:"logsBloom"         gencodec:"required"`
-	Logs              []*Log `json:"logs"              gencodec:"required"`
+	PostState         []byte   `json:"root"`
+	Status            uint     `json:"status"`
+	CumulativeGasUsed *big.Int `json:"cumulativeGasUsed" gencodec:"required"`
+	Bloom             Bloom    `json:"logsBloom"         gencodec:"required"`
+	Logs              []*Log   `json:"logs"              gencodec:"required"`
 
 	// Implementation fields (don't reorder!)
 	TxHash          common.Hash    `json:"transactionHash" gencodec:"required"`
 	ContractAddress common.Address `json:"contractAddress"`
-	GasUsed         uint64         `json:"gasUsed" gencodec:"required"`
+	GasUsed         *big.Int       `json:"gasUsed" gencodec:"required"`
 }
 
 type receiptMarshaling struct {
 	PostState         hexutil.Bytes
 	Status            hexutil.Uint
-	CumulativeGasUsed hexutil.Uint64
-	GasUsed           hexutil.Uint64
+	CumulativeGasUsed *hexutil.Big
+	GasUsed           *hexutil.Big
 }
 
 // receiptRLP is the consensus encoding of a receipt.
 type receiptRLP struct {
 	PostStateOrStatus []byte
-	CumulativeGasUsed uint64
+	CumulativeGasUsed *big.Int
 	Bloom             Bloom
 	Logs              []*Log
 }
 
 type receiptStorageRLP struct {
 	PostStateOrStatus []byte
-	CumulativeGasUsed uint64
+	CumulativeGasUsed *big.Int
 	Bloom             Bloom
 	TxHash            common.Hash
 	ContractAddress   common.Address
 	Logs              []*LogForStorage
-	GasUsed           uint64
+	GasUsed           *big.Int
 }
 
 // NewReceipt creates a barebone transaction receipt, copying the init fields.
-func NewReceipt(root []byte, failed bool, cumulativeGasUsed uint64) *Receipt {
-	r := &Receipt{PostState: common.CopyBytes(root), CumulativeGasUsed: cumulativeGasUsed}
+func NewReceipt(root []byte, failed bool, cumulativeGasUsed *big.Int) *Receipt {
+	r := &Receipt{PostState: common.CopyBytes(root), CumulativeGasUsed: new(big.Int).Set(cumulativeGasUsed)}
 	if failed {
 		r.Status = ReceiptStatusFailed
 	} else {
