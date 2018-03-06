@@ -88,7 +88,7 @@ $ iron --fast --cache=1024 --unlock <your-account-address> console
 
 #### Start mining locally to test your contracts
 
-In orde to test functionalities while using the Dapp, you need to mine locally to execute transactions. It's as simple as type the following command in the JavaScript console:
+In order to test functionalities while using the Dapp, you need to mine locally to execute transactions. It's as simple as type the following command in the JavaScript console:
 
 ```
 > miner.start()
